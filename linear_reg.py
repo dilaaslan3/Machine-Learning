@@ -10,9 +10,10 @@ class LinearRegression:
     def fit(self, X, y):
         #we need to initiliaze the bias and weigths parameters
         n_samples, n_features = X.shape
+        print(n_features)
         self.weigths = np.zeros(n_features) #set the zeros for each coefficient of x
         self.bias = 0 
-
+        
         #gradient descent
         for _ in range(self.n_iters):
             y_pred = np.dot(X, self.weigths) + self.bias
@@ -27,3 +28,5 @@ class LinearRegression:
         y_pred = np.dot(X, self.weigths) + self.bias
         return y_pred
 
+    def score(self, y, y_pred): #mean squared error
+        return np.mean((y-y_pred)**2)
