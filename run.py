@@ -24,18 +24,16 @@ def main():
     print("Root Mean Absolute Error score is: ", msqrte_value)
     print("R-Squared Error score is: ", rsqrte_value)
 
-    y_pred_line = regressor.predict(X)
     plt.figure(figsize=(8, 6))
-    plt.scatter(X_train, y_train, color='b', s=10)
     plt.scatter(X_test, y_test, color='r', s=10)
-    plt.plot(X, y_pred_line, color='black', linewidth=2, label="Prediction")
+    plt.plot(X_test, predicted, color='black', linewidth=2, label="Prediction")
     plt.show()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-file_name", help="file_name")
-    parser.add_argument('-lr', help="learning rate, float")
-    parser.add_argument("-n_iter", help="number of iterations, int")
+    parser.add_argument("-file_name", type=str, required=True, help="file_name")
+    parser.add_argument('-lr', type=float, required=False, default=0.01, help="learning rate, float")
+    parser.add_argument("-n_iter", type=int, required=False, default=20, help="number of iterations, int")
     args = parser.parse_args()
     main()

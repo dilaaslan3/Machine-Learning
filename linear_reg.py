@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class LinearRegression:
@@ -14,15 +15,22 @@ class LinearRegression:
         # set the zeros for each coefficient of x
         self.weigths = np.zeros(n_features)
         self.bias = 0
-
+        loss = []
         # gradient descent
         for _ in range(self.n_iters):
             y_pred = self.predict(X)
+            cost = np.mean((y-y_pred)**2)
+            loss.append(cost)
+            
             dw = (1/n_samples) * np.dot(X.T, (y_pred - y))
             db = (1/n_samples) * np.sum(y_pred-y)
 
             self.weigths -= self.lr*dw
             self.bias -= self.lr*db
+
+        plt.figure(figsize=(8, 6))
+        plt.title("Loss Curve")
+        plt.plot(loss)
 
     def predict(self, X):
         return np.dot(X, self.weigths) + self.bias
