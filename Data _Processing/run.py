@@ -3,8 +3,8 @@ from Data_Provider import DataProvider
 
 
 def main():
-    provider = DataProvider()
-    df = provider.read(f'./{args.dataset}')
+    provider = DataProvider(f'./{args.dataset}')
+    df = provider.read()
     X = provider.one_hot_encoding(df)
     X_train, X_validation, X_test, y_train, y_validation, y_test = provider.split(X, args.train_ratio)
     X_train_df_mean, X_train_df_std, X_train_norm, X_validation_norm, X_test_norm = provider.normalize(X_train, X_validation, X_test)

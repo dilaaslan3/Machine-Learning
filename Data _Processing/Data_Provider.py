@@ -4,16 +4,19 @@ import numpy as np
 
 class DataProvider:
 
-    def read(self, path):
-        df = pd.read_csv(path)
+    def __init__(self, data):
+        self.data = data
+
+    def read(self):
+        df = pd.read_csv(self.data)
         df = df.drop(['car_ID', 'CarName'], axis=1)
 
         # null checkpoint
         # print(df.isnull().sum())
 
-        # print(df.info())
-        # print("Categorical features distribution: \n", df.describe(include=[object]))
-        # print("\nNumeric features distribution: \n", df.describe())
+        print(df.info())
+        print("Categorical features distribution: \n", df.describe(include=[object]))
+        print("\nNumeric features distribution: \n", df.describe())
 
         return df
 
