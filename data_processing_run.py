@@ -4,7 +4,10 @@ import os
 
 
 def main():
+
     path = f"Output{os.sep}{args.out_folder}"
+    if not os.path.exists(path):
+        os.makedirs(path)
     provider = DataProvider(args.dataset, path)
     df = provider.read()
     X = provider.one_hot_encoding(df)

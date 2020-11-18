@@ -45,22 +45,13 @@ class DataProvider:
         train_df_std = train.std()
 
         if x_or_y is True:
-            self.save(train_df_mean, train_df_std, True)
+            train_df_mean.to_csv(self.out_folder + os.sep + "features_train_mean.csv")
+            train_df_std.to_csv(self.out_folder + os.sep + "features_train_std.csv")
         else:
-            self.save(train_df_mean, train_df_std, False)
+            train_df_mean.to_csv(self.out_folder + os.sep + "target_train_mean.csv")
+            train_df_std.to_csv(self.out_folder + os.sep + "target_train_std.csv")
 
         train_df_norm = (train - train_df_mean) / train_df_std
         val_df_norm = (validation - train_df_mean) / train_df_std
         test_df_norm = (test - train_df_mean) / train_df_std
         return train_df_norm, val_df_norm, test_df_norm
-
-    def save(self, train_mean, train_std, x_or_y):
-        if not os.path.exists(self.out_folder):
-            os.makedirs(self.out_folder)
-
-        if x_or_y is True:
-            train_mean.to_csv(self.out_folder + os.sep + "features_train_mean.csv")
-            train_std.to_csv(self.out_folder + os.sep + "features_train_std.csv")
-        else:
-            train_mean.to_csv(self.out_folder + os.sep + "target_train_mean.csv")
-            train_std.to_csv(self.out_folder + os.sep + "target_train_std.csv")
