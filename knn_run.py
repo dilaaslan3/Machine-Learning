@@ -22,6 +22,8 @@ def main():
 
     elif args.type == "reg":
         y_pred = knn.predict(X_test, knn_type="reg")
+        mse = np.mean((y_test-y_pred)**2)
+        print(mse)
 
     else:
         return print("Undefined knn type")
